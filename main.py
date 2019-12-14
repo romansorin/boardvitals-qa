@@ -1,7 +1,7 @@
 import requests
 import json
 import time
-from .exam import headers, exam_id, exam_url
+from exam import headers, exam_id
 
 # Get exam as JSON
 def get_exam_details(url):
@@ -35,4 +35,31 @@ def get_exam_questions():
     print("Finished fetching exam questions")
 
 
-get_exam_questions()
+def get_exam_qa():
+    qa = []
+    with open('exam_qa.json', 'w') as json_file:
+        json.dump([], json_file)
+    with open('exam_questions.json', 'r') as json_file:
+        data = json.load(json_file)
+        for record in data:
+            question = record['data']['data']['question']
+
+            question = {
+                "qid": record['id'],
+                "question": question['name'],
+                "answer": get_question_answer(question),
+                "explanation": question['explanation']['name']
+            }
+
+            qa.append(question)
+    with open('exam_qa.json', 'w') as json_file:
+        json.dump(qa, json_file)
+
+
+def get_question_answer(question):
+    for answer in question['answers']:
+        if answer['type'] == "CorrectAnswer":
+            return answer
+
+
+get_exam_qa()

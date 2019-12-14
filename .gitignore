@@ -133,5 +133,6 @@ dmypy.json
 
 exam_details.json
 exam_questions.json
+exam_qa.json
 exam.py
 
