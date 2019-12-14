@@ -3,6 +3,7 @@ import json
 import time
 from exam import headers, exam_id
 
+
 # Get exam as JSON
 def get_exam_details(url):
     response = requests.request("GET", url, headers=headers)
