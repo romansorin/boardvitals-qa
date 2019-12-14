@@ -1,7 +1,7 @@
 import requests
 import json
 import time
-from exam import headers, exam_id
+from exam import headers, exam_id, exam_url
 
 
 # Get exam as JSON
@@ -63,4 +63,10 @@ def get_question_answer(question):
             return answer
 
 
-get_exam_qa()
+def start():
+    get_exam_details(exam_url)
+    get_exam_questions()
+    get_exam_qa()
+    print("Finished")
+
+start()
