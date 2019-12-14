@@ -1,6 +1,8 @@
-import requests
 import json
 import time
+
+import requests
+
 from exam import headers, exam_id, exam_url
 
 
@@ -36,6 +38,7 @@ def get_exam_questions():
     print("Finished fetching exam questions")
 
 
+# Get question/answer pairs into JSON
 def get_exam_qa():
     qa = []
     with open('exam_qa.json', 'w') as json_file:
@@ -57,16 +60,19 @@ def get_exam_qa():
         json.dump(qa, json_file)
 
 
+# Return the correct answer object from a question
 def get_question_answer(question):
     for answer in question['answers']:
         if answer['type'] == "CorrectAnswer":
             return answer
 
 
+# Query exam URL and create question/answer JSON
 def start():
     get_exam_details(exam_url)
     get_exam_questions()
     get_exam_qa()
     print("Finished")
+
 
 start()
