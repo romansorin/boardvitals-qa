@@ -6,6 +6,10 @@ import requests
 from exam import headers, exam_id, exam_url
 
 
+# TODO
+def get_exams():
+    pass
+
 # Get exam as JSON
 def get_exam_details(url):
     response = requests.request("GET", url, headers=headers)
