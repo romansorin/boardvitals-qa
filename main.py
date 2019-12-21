@@ -6,10 +6,6 @@ import requests
 from exam import headers, exam_id, exam_url
 
 
-# TODO
-def get_exams():
-    pass
-
 # Get exam as JSON
 def get_exam_details(url):
     response = requests.request("GET", url, headers=headers)
@@ -22,6 +18,7 @@ def get_num_of_questions():
     with open('exam_details.json', 'r') as json_file:
         data = json.load(json_file)
         exam = data['exam']
+        print("Total exam questions:", exam['total_questions'])
         return exam['total_questions']
 
 
@@ -34,7 +31,7 @@ def get_exam_questions():
         question_url = f"https://www.boardvitals.com/api/rc/exams/{exam_id}/questions/{question_id}.json"
         response = requests.request("GET", question_url, headers=headers)
         questions.append({"id": question_id, "data": response.json()})
-        print(question_id)
+        print("Question: ", question_id)
         time.sleep(5)
     with open('exam_questions.json', 'w') as json_file:
         json.dump(questions, json_file)
